@@ -1,5 +1,4 @@
 //import org.graalvm.compiler.hotspot.nodes.AllocaNode;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Random; 
@@ -299,8 +298,6 @@ public class PokemonGame{
                 }   
                 break;
             default:
-                
         }
     }
-
 }
