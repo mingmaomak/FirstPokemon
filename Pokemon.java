@@ -2,20 +2,41 @@ public class Pokemon{
     public byte species = 0;
     public int ramUsage = 0;
     public byte cpuUsage = 0;
-    private String name = "";
-    public int feedCount = 0;
-    private int wins = 0;
-    private int losts = 0;
-    private int draws = 0;
+    public String name = "";
+    private int feedCount = 0;
+    public int wins = 0;
+    public int losts = 0;
+    public int draws = 0;
     public Pokemon(byte byt, int ramU, byte cpuU, String n){
         species = byt;
         ramUsage = ramU;
         cpuUsage = cpuU;
         name = n;
     }
-    public void feed(int feedingValue){
-        ramUsage += feedingValue;
-        feedCount++;
+    public void feed(byte feedingValue){
+        switch(feedingValue){
+            case 2:
+                for(byte sam = 0; sam < 4; sam++){
+                    ramUsage +=   64000000;
+                    if(ramUsage>2000000000){
+                        ramUsage = 2000000000;
+                        break;
+                    } 
+                }
+                feedCount++;
+            break;
+            case 3:
+                cpuUsage -= 10;
+                if(cpuUsage<((8-species)*2)) cpuUsage = (byte) ((8-species)*2);
+                feedCount++;
+            break;
+            case 4:
+                cpuUsage -= 30;
+                if(cpuUsage<((8-species)*2)) cpuUsage = (byte) ((8-species)*2);
+                feedCount++;
+            break;
+            default:
+        }
     }
     public int battle (String nameEnemy,int ramUsageEnemy){
         //System.out.println("For debugging purposes:\nnameEnemy:"+nameEnemy+"\nramUsageEnemy:"+ramUsageEnemy);
@@ -64,5 +85,8 @@ public class Pokemon{
     public String rename(String toRename){
         name = toRename;
         return "toRename";
+    }
+    public static void main(String[] args) {
+        System.out.println("This is compiled from a java file named Pokemon.java\nThis is NOT the actual Pokemon game.");
     }
 }

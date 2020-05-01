@@ -16,17 +16,19 @@ public class PokemonGame{
     public static int choosePokemon=-2100000000;
     private static int boringVar = 0;
     public static int[] enemyRamUsage = {1,
-          99999999,
-         200000000,
-         311111111,
-         444444444,
-         600000000,
-         777777777,
-        1000000000,
-        1250000000,
-        1510000000,
-        1800000000,
-        2100000000};
+        100000000,
+        210000000,
+        330000000,
+        460000000,
+        600000000,
+        750000000,
+        910000000,
+       1080000000,
+       1260000000,
+       1450000000,
+       1650000000,
+       1860000000,
+       2080000000};
     public static void main(String[] args){
         String commandStringg = "";
         LocalDate myDate = LocalDate.now(); // Create a date object
@@ -51,49 +53,58 @@ public class PokemonGame{
                     thirst -= 10;
                     if(hunger<0) hunger = 0;
                     if(thirst<0) hunger = 0;
-                    /* System.out.println("Also, here's info of every Pokemon you own.");
-                    for(Pokemon i : allPokemon){
-                        boringVar++;
-                        System.out.println("Pokemon number "+boringVar);
-                        System.out.println(i.describe()+"\n");
-                    }
-                    boringVar = 0; */
-                    System.out.println("If you want to, you can choose your Pokemon to be removed, enter 0 or a number higher than your amount of Pokemon to cancel");
-                    commandStringg = sc.nextLine();
-                    while(choosePokemon == -2100000000){
-                        try {
-                            choosePokemon = Integer.parseInt(commandStringg);
+                    if(allPokemon.size()>0){
+                        System.out.println("Also, here's info of every Pokemon you own.");
+                        for(Pokemon i : allPokemon){
+                            boringVar++;
+                            System.out.println("Pokemon number "+boringVar);
+                            System.out.println(i.describe()+"\n");
                         }
-                        catch (NumberFormatException e){
-                            choosePokemon = - -2100000000;
-                        } 
-                    }
-                    if(choosePokemon == 0 || choosePokemon > allPokemon.size()){
-                        System.out.println ("removal canceled.");
-                    }
-                    else{
-                        Pokemon yourChosenPokemon = allPokemon.get((choosePokemon-1));
-                        System.out.println("Are you really sure to remove this Pokemon? (Enter 1 to confirm removal)\n"+yourChosenPokemon.describe());
-                        choosePokemon = - -2100000000;
+                    
+                        boringVar = 0; 
+                        System.out.println("If you want to, you can choose your Pokemon to be removed, enter 0 or a number higher than your amount of Pokemon to cancel");
                         commandStringg = sc.nextLine();
-                        while(choosePokemon == -2100000000 || choosePokemon == 2100000000){
+                        while(choosePokemon == -2100000000){
                             try {
                                 choosePokemon = Integer.parseInt(commandStringg);
                             }
                             catch (NumberFormatException e){
                                 choosePokemon = - -2100000000;
                             } 
-                        }    
-                        if(choosePokemon == 1){
-                            allPokemon.remove((choosePokemon-1));
-                            System.out.println("Pokemon removed successfully.");
-                        }                    
-                        else System.out.println("removal is cancelled.");// because you entered "+choosePokemon);
+                        }
+                        if(choosePokemon == 0 || choosePokemon > allPokemon.size()){
+                            System.out.println ("Removal canceled.");
+                        }
+                        else{
+                            Pokemon yourChosenPokemon = allPokemon.get((choosePokemon-1));
+                            System.out.println("Are you really sure to remove this Pokemon? (Enter 1 to confirm removal)\n"+yourChosenPokemon.describe());
+                            choosePokemon = - -2100000000;
+                            commandStringg = sc.nextLine();
+                            while(choosePokemon == -2100000000 || choosePokemon == 2100000000){
+                                try {
+                                    choosePokemon = Integer.parseInt(commandStringg);
+                                }
+                                catch (NumberFormatException e){
+                                    choosePokemon = - -2100000000;
+                                } 
+                            }    
+                            if(choosePokemon == 1){
+                                allPokemon.remove((choosePokemon-1));
+                                System.out.println("Pokemon removed successfully.");
+                            }                    
+                            else System.out.println("Removal is cancelled.");// because you entered "+choosePokemon);
+                        }
                     } 
                 break;
                 case '4':
                     if (hunger < 100 && thirst < 100) garden();
                     else System.out.println("Please go back to the house first.");
+                break;
+                case '5':
+                    myDate = LocalDate.now(); // Create a date object
+                    System.out.println("yyyy mm dd of today is "+myDate); // Display the current date
+                    myTime = LocalTime.now();
+                    System.out.println("The current time is "+myTime);
                 break;
                 case '0': 
                     System.out.println("Goodbye");
@@ -134,6 +145,7 @@ public class PokemonGame{
         System.out.println("Enter 2 to go to the shop");
         System.out.println("Enter 3 to go to the house");
         System.out.println("Enter 4 to go to the garden");
+        System.out.println("Enter 5 to view current date & time.");
         System.out.println("Enter 0 to quit the game");
         String commandString = "";
         while(commandString.isEmpty()){
@@ -232,8 +244,7 @@ public class PokemonGame{
                     else{
                         Pokemon yourChosenPokemon = allPokemon.get((choosePokemon-1));
                         coins -= pay;
-                        yourChosenPokemon.ramUsage +=  256000000;
-                        if(yourChosenPokemon.ramUsage>2000000000) yourChosenPokemon.ramUsage = 2000000000;
+                        yourChosenPokemon.feed((byte)2);
                         System.out.println("The Pokemon now use "+yourChosenPokemon.ramUsage+" bytes of RAM.\nYou now have "+coins+" coins.\nHere is the Pokemon's updated description."+yourChosenPokemon.describe());
                     }                 
                 }
@@ -260,8 +271,7 @@ public class PokemonGame{
                     else{
                         Pokemon yourChosenPokemon = allPokemon.get((choosePokemon-1));
                         coins -= pay;
-                        yourChosenPokemon.cpuUsage -= 10;
-                        if(yourChosenPokemon.cpuUsage<((8-yourChosenPokemon.species)*2)) yourChosenPokemon.ramUsage = ((8-yourChosenPokemon.species)*2);
+                        yourChosenPokemon.feed((byte)3);
                         System.out.println("The Pokemon now use "+yourChosenPokemon.cpuUsage+"% of CPU usage.\nYou now have "+coins+" coins.\nHere is the Pokemon's updated description."+yourChosenPokemon.describe());
                     }                 
                 }
@@ -288,8 +298,7 @@ public class PokemonGame{
                     else{
                         Pokemon yourChosenPokemon = allPokemon.get((choosePokemon-1));
                         coins -= pay;
-                        yourChosenPokemon.cpuUsage -= 30;
-                        if(yourChosenPokemon.cpuUsage<((8-yourChosenPokemon.species)*2)) yourChosenPokemon.ramUsage = ((8-yourChosenPokemon.species)*2);
+                        yourChosenPokemon.feed((byte) 4);
                         System.out.println("The Pokemon now use "+yourChosenPokemon.cpuUsage+"% of CPU usage.\nYou now have "+coins+" coins.\nHere is the Pokemon's updated description.\n"+yourChosenPokemon.describe());
                     }                 
                 }
@@ -301,3 +310,4 @@ public class PokemonGame{
         }
     }
 }
+//"If you want to, you can choose your Pokemon to be removed, enter 0 or a number higher than your amount of Pokemon to cancel"
