@@ -30,7 +30,7 @@ public class MenuExample implements ActionListener{
         2080000000};
     private static LocalDate myDate;
     private static LocalTime myTime;
-    private static String coinText = "You have 0 coins.";
+    private static String coinText = "You have 0 coins. Get more coins from battling in the gym.";
     //Swing Variables
     private static JFrame f;    
     private static JMenuBar mb;    
@@ -264,7 +264,7 @@ public class MenuExample implements ActionListener{
     }
     public static void item2(){
         int pay = 8;
-        String str1 = "",itemString = "Choose your Pokemon to feed a 32GB ram food\nEnter 0 or a number higher than your amount of Pokemon to cancel";
+        String str1 = "",itemString = "Choose your Pokemon to feed a 256GB ram food\nEnter 0 or a number higher than your amount of Pokemon to cancel";
         if(coins>=pay){
             while (choosePokemon == -2100000000){
                 str1 = JOptionPane.showInputDialog(itemString);
@@ -345,7 +345,7 @@ public class MenuExample implements ActionListener{
     }
     public static void updateCoin(){
         choosePokemon = -2100000000;
-        coinText = "You have " + coins + " coins.";
+        coinText = "You have " + coins + " coins. Get more coins from battling in the gym.";
         coinTextField.setText(coinText);
     }
 }    
