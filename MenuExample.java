@@ -264,7 +264,7 @@ public class MenuExample implements ActionListener{
     }
     public static void item2(){
         int pay = 8;
-        String str1 = "",itemString = "Choose your Pokemon to feed a 256GB ram food\nEnter 0 or a number higher than your amount of Pokemon to cancel";
+        String str1 = "",itemString = "Choose your Pokemon to feed a 256MB ram food\nEnter 0 or a number higher than your amount of Pokemon to cancel";
         if(coins>=pay){
             while (choosePokemon == -2100000000){
                 str1 = JOptionPane.showInputDialog(itemString);
